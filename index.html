@@ -1,24 +1,108 @@
 <html>
-	<head></head>
+    <head>
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<script src="validation.js"></script>
 	<body>
-		<!-- Cognome, Nome, Data di nascita, comune di nascita, codice fiscale,sesso, comune di residenza, cap di residenza, indirizzo di residenza, numero di telefono.
+	    <form>
+		<table>
+		    <tr>
+			<td>
+			    <label for="cognome">Cognome:</label>
+			</td>
+			<td>
+			    <input type="text" id="cognome" required name="Cognome" maxlength="40" autofocus /><br>
+			</td>
+		    </tr>
 
-	  I dati non obbligatori sono : Allergie,Eventuale grado handicap,descrizione Handicap, note. -->
-		Cognome: <input type="text" name="Cognome"><br>
-		Nome: <input type="text" name="Nome"><br>
-		Data di nascita: <input type="text" name="Data"><br>
-		Comune di nascita: <input type="text" name="Comune"><br>
-		Codice fiscale: <input type="text" name="CF"><br>
-		Sesso: <input type="text" name="S"><br>
-		Comune di residenza: <input type="text" name="Residenza"><br>
-		CAP di residenza: <input type="text" name="CAP"><br>
-		Indirizzo di residenza: <input type="text" name="Indirizzo"><br>
-		Numero di telefono: <input type="text" name="Numero"><br>
+		    <tr>
+			<td>
+			    <label for="nome">Nome:</label>
+			</td>
+			<td>
+			    <input type="text" id="nome" required name="Nome" maxlength="40"/><br>
+			</td>
+		    </tr>
 
-		Allergie: <input type="text" name="Allergie"><br>
-		Grado handicap: <input type="text" name="Grado"><br>
-		Descrizione handicap: <input type="text" name="Descrizione"><br>
-		Note: <input type="text" name="note"><br>
+		    <tr>
+			<td>
+			    <label for="data">Data di nascita:</label>
+			</td>
+			<td>
+			    <input type="date" id="data" required name="Data" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"/><br>
+			</td>
+		    </tr>
+
+		    <tr>
+			<td>
+			    <label for="comune">Comune di nascita:</label>
+			</td>
+			<td>
+			    <input type="text" id="comune" required name="Comune"/><br>
+			</td>
+		    </tr>
+
+		    <tr>
+			<td>
+			    <label for="cf">Codice fiscale:</label>
+			</td>
+			<td>
+			    <input type="text" id="cf" required name="CF" maxlength="16"/><br>
+			</td>
+		    </tr>
+
+		    <tr>
+			<td>
+			    Sesso:
+			</td>
+			<td>
+			    <label for="M">M</label> <input type="radio" name="S" id="M"/>
+			    <label for="F">F</label> <input type="radio" required name="S" id="F"/><br>
+			</td>
+		    </tr>
+
+		    <tr>
+			<td>
+			    <label for="residenza">Comune di residenza:</label>
+			</td>
+			<td>
+			    <input type="text" id="residenza" required name="Residenza"/><br>
+			</td>
+		    </tr>
+
+		    <tr>
+			<td>
+			    <label for="cap">CAP di residenza:</label>
+			</td>
+			<td>
+			    <input type="numeric" id="cap" required name="CAP"/><br>
+			</td>
+		    </tr>
+
+		    <tr>
+			<td>
+			    <label for="indirizzo">Indirizzo di residenza:</label>
+			</td>
+			<td>
+			    <input type="text" id="indirizzo" required name="Indirizzo"/><br>
+			</td>
+		    </tr>
+
+		    <tr>
+			<td>
+			    <label for="tel">Numero di telefono:</label>
+			</td>
+			<td>
+			    <input type="tel" id="tel" required name="Numero" pattern="[0-9]*"/><br>
+			</td>
+		    </tr>
+		</table>
+
+		Allergie: <input type="text" name="Allergie"/><br>
+		Grado handicap: <input type="text" name="Grado"/><br>
+		Descrizione handicap: <input type="text" name="Descrizione"/><br>
+		Note: <input type="text" name="note"/><br>
+		<input type="submit" name="submit" value="Aggiungi"/>
+	    </form>
 
 	</body>
 </html>

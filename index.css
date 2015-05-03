@@ -1,3 +1,3 @@
-input {
-	border-radius: 25px;
+input:not([type="submit"]) {
+    border-radius: 25px;
 }

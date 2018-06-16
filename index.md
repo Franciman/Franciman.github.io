@@ -23,8 +23,11 @@ e quindi può agevolare e anzi permettere una comprensione più profonda degli a
 
 Ma se nella millenaria storia della matematica gli insiemi sono dei nuovi arrivati, sono davvero utili? In fondo prima non erano necessari...
 Per rispondere a questa domanda dobbiamo prima capire cosa sono questi insiemi.
+Ma ne vale la pena farlo?  
+In fondo la teoria degli insiemi è contraddittoria! ahah
 
-## Teoria degli insiemi: le origini
+
+## Teoria degli insiemi: un primo tentativo
 
 Cos'è un insieme? Possiamo provare a dare varie spiegazioni:
  - è un raggruppamento di cose
@@ -40,7 +43,7 @@ Una definizione è ha due componenti:
 Ecco un esempio:
 **Il quadrato** è *un poligono regolare con 4 lati*
 
-**Il quadrato** è il definiendum
+**Il quadrato** è il definiendum  
 *un poligono regolare con 4 lati* è il definiens
 
 Una buona definizione, una definizione che possiamo ritenere sicuramente valida, contiene nel definiens solo nozioni note.
@@ -63,3 +66,23 @@ L'impossibilità di dare buone definizioni per tutto è conosciuta sin dall'anti
 ovvero nel tentare di spiegare una cosa in termini di altre già note ci si ritrova a procedere all'infinito all'indietro.
 Aristotele per uscire da questa situazione di empasse introdusse il motore immobile, ovvero qualcosa che genera movimento
 e quindi la vita e il creato senza che però sia esso stesso stato messo in movimento, cioè creato.
+Gli enti primitivi hanno un ruolo analogo a quello del motore immobile.
+
+È importante notare che avere gli insiemi come enti primitivi non è una necessità, infatti potremmo
+avere come ente primitivo quello di proprietà o di oggetto e da questi poi definire cos'è un insieme in modo leggittimo.
+Quindi decidere quali sono gli enti primitivi è una questione di comodità e di potenza espressiva,
+nel momento in cui non riesco a definire qualcosa e mi serve, la posso assumere come ente primitivo.
+Ovviamente avere un numero basso di enti primitivi rende la teoria più elegante e più maneggevole da studiare (ma magari non da studiare)
+Inoltre scegliere i giusti enti primitivi permette poi di dare definizioni più naturali e semplici e rende la teoria più maneggevole.
+(Un qualcosa di analogo avviene con le affermazioni, quando c'è un'affermazione che non riusciamo a dimostrare, ma ci piace, la prendiamo per vera e l'aggiungiamo agli assiomi.
+Esempio famoso è il V assioma della geometria euclidea, si è cercato di dimostrarlo per secoli a partire dagli altri assiomi, senza però riuscirci)
+
+La strada di assumere l'insieme come ente primitivo è quella che seguì Cantor.
+
+
+Una piccola digressione:
+> Qual è la definizione di definizione?  
+> Le definizioni non sono necessarie in matematica, infatti, in linea di principio, data una definizione, si possono sempre sostituire
+> tutte le occorrenze del definiendum con il definiens, e in questo modo il significato resta lo stesso.
+> Per questo motivo non è necessario dare una definizione o assumere il concetto di definizione come ente primitivo perché se ne può fare a meno.
+> Però nella pratica le definizioni sono invece utili perché permettono di snellire il linguaggio!

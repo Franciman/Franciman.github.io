@@ -68,6 +68,9 @@ Aristotele per uscire da questa situazione di empasse introdusse il motore immob
 e quindi la vita e il creato senza che però sia esso stesso stato messo in movimento, cioè creato.
 Gli enti primitivi hanno un ruolo analogo a quello del motore immobile.
 
+
+Come si determina quali nozioni sono primitive?
+Spesso si dice che una nozione è primitiva se è sufficientemente intuitiva e quindi non c'è realmente bisogno di definirla.
 È importante notare che avere gli insiemi come enti primitivi non è una necessità, infatti potremmo
 avere come ente primitivo quello di proprietà o di oggetto e da questi poi definire cos'è un insieme in modo leggittimo.
 Quindi decidere quali sono gli enti primitivi è una questione di comodità e di potenza espressiva,
@@ -86,3 +89,44 @@ Una piccola digressione:
 > tutte le occorrenze del definiendum con il definiens, e in questo modo il significato resta lo stesso.
 > Per questo motivo non è necessario dare una definizione o assumere il concetto di definizione come ente primitivo perché se ne può fare a meno.
 > Però nella pratica le definizioni sono invece utili perché permettono di snellire il linguaggio!
+
+
+## Teoria degli insiemi: così parlò Cantor
+
+Euclide, nei suoi Elementi, come abbiamo già avuto modo di ricordare, assume come enti primitivi il punto, la retta e il piano.
+Per essi dà anche una "definizione", ad esempio per il punto afferma: "un punto è ciò che non ha dimensioni".
+Ovviamente questa non è una buona definizione, come ci aspettavamo, però non è questo il fine di questa descrizione, ma
+piuttosto, essa serve a far capire il lettore di cose si vuole parlare, cosa si vuole intendere per punto, a delimitare il discorso.
+
+Anche Cantor fa una cosa simile per la nozione di insieme, egli dice:
+> Un insieme è una collezione in un tutto unico di oggetti definiti distinti della nostra
+> percezione o del nostro pensiero, che sono chiamati gli elementi dell'insieme.
+
+Si nota facilmente che questa non può essere una buona definizione (cos'è una collezione? E un oggetto?), ma è piuttosto un'esplicazione, nello stile di Euclide.
+
+Analizziamo questa descrizione:
+
+Leggiamo che un insieme è una collezione **in un tutto unico** di oggetti:
+ciò significa che alla pluralità dei numeri naturali viene sostituito l'insieme dei numeri naturali che è un'entità unica.
+
+inoltre gli oggetti devono essere **definiti e distinti**:
+gli oggetti non devono essere cose vaghe, ma ben circoscritti nel loro significato,
+mentre il fatto che debbano essere distinti comporta che non possiamo ripetere lo stesso oggetto più volte,
+quindi in un insieme troveremo oggetti tutti diversi, non incontreremo mai lo stesso oggetto più volte.
+
+Il fatto che gli oggetti siano **della nostra percezione o del nostro pensiero** significa che gli insiemi possono contenere sia oggetti concreti che astratti.
+Ma resta comunque vago cosa siano gli oggetti **del nostro pensiero**
+
+Notiamo esplicitamente che nella nozione di insieme proposta da Cantor non compare mai la nozione di proprietà,
+che nel precedente capitolo pure pensavamo fosse collegata a quella di insieme.
+Quindi si può avere anche una collezione eterogenea di oggetti per cui non è detto che ci sia una proprietà che le colleghi tutte.
+
+> Un esempio di oggetti non ben definiti sono le nuvole! Quindi non possiamo avere insiemi di nuvole, occhio!
+
+Da questa definizione intuitiva è difficile dedurre qualcosa, ad esempio un insieme con un solo elemento contiene tutti oggetti distinti?
+La risposta non è chiara, quindi bisogna fare una scelta dando un'interpretazione delle parole di Cantor.
+
+Questa definizione non comprende il caso di un insieme senza elementi, l'insieme vuoto, però siccome ci è utile,
+facciamo una scelta deliberata e lo includiamo tra i possibili insiemi.
+
+Data queste piccole difficoltà già si può capire che le definizioni che rimandano all'intuizione sono molto deboli.

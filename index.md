@@ -130,3 +130,25 @@ Questa definizione non comprende il caso di un insieme senza elementi, l'insieme
 facciamo una scelta deliberata e lo includiamo tra i possibili insiemi.
 
 Data queste piccole difficoltà già si può capire che le definizioni che rimandano all'intuizione sono molto deboli.
+
+
+## L'insieme di tutti gli insiemi
+
+Dimostriamo che in ZF (ma anche nella teoria naive di Cantor) l'insieme di tutti gli insiemi non esiste
+ovvero che  
+"non esiste x tale che per ogni y si abbia y \in x"
+
+Per dimostrarlo è più comodo considerare la proposizione equivalente:
+"per ogni x esiste y tale che y \notin x"
+
+Dimostrazione.  
+Sia x un insieme. Sfruttando l'assioma A6 di comprensione possiamo considerare l'insieme y = { z \in x : z \notin z }
+Sì. stiamo sfruttando il paradosso di Russel, ma in questo contesto l'assurdo a cui ci porterà sarà innocuo.
+Supponiamo che y \in x, allora vediamo che il paradosso di Russel ha effetto:  
+si possono avere due casi:  
+- y \in y    -> in questo caso per definizione di y si ha y \notin y, quindi abbiamo un assurdo
+- y \notin y -> in questo caso per definizione di y si ha y \in y, quindi abbiamo un assurdo.  
+Insomma y \in x non è possibile, quindi deve essere y \notin x.  
+Abbiamo, dunque, trovato un elemento non contenuto nell'insieme x. Quindi non esiste un insieme che contenga tutti gli insiemi,  
+perché per ogni insieme riusciamo a trovare un oggetto che non gli appartenga.  
+                                                                                                  QUADRATOBIANCO

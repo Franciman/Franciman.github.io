@@ -143,7 +143,7 @@ Per dimostrarlo è più comodo considerare la proposizione equivalente:
 
 Dimostrazione.  
 Sia x un insieme. Sfruttando l'assioma A6 di comprensione possiamo considerare l'insieme y = { z \in x : z \notin z }
-Sì. stiamo sfruttando il paradosso di Russel, ma in questo contesto l'assurdo a cui ci porterà sarà innocuo.
+Sì. stiamo sfruttando il paradosso di Russel, ma in questo contesto l'assurdo a cui ci porterà non sarà distruttivo per la teoria, ma anzi auspicabile.
 Supponiamo che y \in x, allora vediamo che il paradosso di Russel ha effetto:  
 si possono avere due casi:  
 - y \in y    -> in questo caso per definizione di y si ha y \notin y, quindi abbiamo un assurdo

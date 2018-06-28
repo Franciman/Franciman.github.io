@@ -147,7 +147,8 @@ Sì. stiamo sfruttando il paradosso di Russel, ma in questo contesto l'assurdo a
 Supponiamo che y \in x, allora vediamo che il paradosso di Russel ha effetto:  
 si possono avere due casi:  
 - y \in y    -> in questo caso per definizione di y si ha y \notin y, quindi abbiamo un assurdo
-- y \notin y -> in questo caso per definizione di y si ha y \in y, quindi abbiamo un assurdo.  
+- y \notin y -> in questo caso per definizione di y si ha y \in y, quindi abbiamo un assurdo.
+
 Insomma y \in x non è possibile, quindi deve essere y \notin x.  
 Abbiamo, dunque, trovato un elemento non contenuto nell'insieme x. Quindi non esiste un insieme che contenga tutti gli insiemi,  
 perché per ogni insieme riusciamo a trovare un oggetto che non gli appartenga.  

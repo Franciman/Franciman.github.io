@@ -153,3 +153,227 @@ Insomma y \in x non è possibile, quindi deve essere y \notin x.
 Abbiamo, dunque, trovato un elemento non contenuto nell'insieme x. Quindi non esiste un insieme che contenga tutti gli insiemi,  
 perché per ogni insieme riusciamo a trovare un oggetto che non gli appartenga.  
                                                                                                   QUADRATOBIANCO
+                                                                                                  
+                                                                                                  
+## Calcolo proposizionale
+La definizione di questo sistema formale avverrà in tre fasi:
+- Definizione del linguaggio
+- Definizione dell'apparato deduttivo
+- Definizione della semantica
+
+To be continued
+
+
+## Teorema di completezza per il calcolo proposizionale
+Il teorema di completezza afferma |= A <=> |- A
+Il verso |= A => |- A è chiamato teorema di completezza (propriamente detto)
+Il verso |- A => |= A è chiamato teorema di adeguatezza
+
+Il teorema di adeguatezza si prova mostrando, per induzione sulla struttura delle dimostrazioni che gli assiomi sono tatuologie
+e che il modus ponens conserva l'essere tautologia (ovvero applicando MP a due tautologie ottengo una tautologia).
+
+Passiamo al teorema di completezza propriamente detto.
+Prima però dimostriamo due lemmi che ci saranno utili.
+
+Lemma 0,00000000001. |- A v ¬A  
+Dimostrazione.  
+Abbiamo |- ¬(A v ¬A) -> ¬(A v ¬A) visto che abbiamo già dimostrato |- A -> A  
+Ora dimostriamo |- ¬(A v ¬A) -> ¬¬(A v ¬A)
+
+Per il teorema di deduzione posso dimostrare ¬(A v ¬A) |- ¬¬(A v ¬A)
+
+Prima dimostriamo ¬(A v ¬A) |- A v ¬A
+
+A -> A v ¬A (Ax-V-Intr1)  
+¬(A v ¬A) -> A -> ¬(A v ¬A) (Ax->Mono)  
+¬(A v ¬A) (Ipotesi)  
+A -> ¬(A v ¬A) (MP)  
+(A -> (A v ¬A)) -> (A -> ¬(A v ¬A)) -> ¬A (Ax¬Intr)  
+¬A -> (MP)  
+¬A -> A v ¬A (Ax-V-Intr2)
+A v ¬A (MP)
+
+Quindi per il teorema di deduzione abbiamo |- ¬(A v ¬A) -> (A v ¬A)
+D'altra parte abbiamo |- ¬(A v ¬A) -> (A v ¬A)
+Quindi:
+
+¬(A v ¬A) -> (A v ¬A)  
+¬(A v ¬A) -> ¬(A v ¬A)  
+[¬(A v ¬A) -> (A v ¬A)] -> [¬(A v ¬A) -> ¬(A v ¬A)] -> ¬¬(A v ¬A) (Ax¬Intr)  
+[¬(A v ¬A) -> ¬(A v ¬A)] -> ¬¬(A v ¬A) (MP)  
+¬¬(A v ¬A) (MP)  
+¬¬(A v ¬A) -> (A v ¬A) (Ax¬¬Elim)  
+(A v ¬A) (MP)
+
+Abbiamo dunque dimostrato |- A v ¬A
+
+
+
+Lemma 0,00000000002. A |- B e ¬A |- B => |- B  
+Dimostrazione.  
+Per il teorema di deduzione abbiamo: |- A -> B e |- ¬A->B
+Quindi dimostriamo B:
+
+A -> B  
+¬A -> B  
+A v ¬A  
+(A -> B) -> (¬A -> B) -> (A v ¬A) -> B (Ax-V-Elim)  
+(¬A -> B) -> (A v ¬A) -> B (MP)  
+(A v ¬A) -> B (MP)  
+B (MP)  
+
+
+
+Ora che abbiamo  questi due lemmi diamo una definizione:
+Prop(A) è l'insieme di tutte le proposizioni presenti nella formula A
+
+Prop(p)      = {p}
+Prop(¬A)     = Prop(A)
+Prop(A -> B) = Prop(A ^ B) = Prop(A v B) = Prop(A <-> B) = Prop(A) u Prop(B)
+
+Data un'interpretazione I definiamo:  
+val-I(A) = A  se I(A) = V  
+         = ¬A se I(A) = F
+         
+         
+Se A è una formula ben formata definiamo Double(A) così:
+Double(p) = p
+Double(¬A) = ¬¬¬Double(A)
+Double(A ^ B) = Double(A) ^ Double(B)
+Double(A v B) = Double(A) v Double(B)
+Double(A -> B) = Double(A) -> Double(B)
+Double(A <-> B) = Double(A) <-> Double(B)
+        
+Lemma 0,00000000003. |- A <-> Double(A)
+Dimostrazione.
+Induzione sulla struttura di A
+A = p, ovvio |- p <-> p
+
+A = B v C
+per ipotesi induttiva si ha
+|- B <-> Double(B)
+|- C <-> Double(C)
+
+Si ha |- Double(B) -> Double(B v C)
+      |- Double(C) -> Double(B v C)
+
+usando l'assioma (B -> Double(B v C)) -> (C -> Double(B v C)) -> (B v C) -> Double(B v C)
+
+otteniamo |- B v C -> Double(B v C)
+
+viceversa sfruttando |- B -> B v C
+                     |- C -> B v C
+                     
+usando l'assioma (Double(B) -> B v C) -> (Double(C) -> B v C) -> (Double(B) v Double(C)) -> B v C
+ma Double(B v C) = Double(B) v Double(C) quindi fatto
+
+A = ¬B
+Allora |- ¬¬¬B -> ¬B è l'assioma Ax¬¬Elim
+|- ¬B -> ¬¬¬B si ottiene così
+¬¬B -> B per l'assioma Ax¬¬Elim
+¬B->(¬¬B -> ¬B) è l'assioma Ax->Mon
+per MP ottengo ¬¬B -> ¬B
+Quindi per Ax¬Intro ottengo ¬¬¬B
+Quindi ¬B |- ¬¬¬B.
+
+Se A = B -> C
+
+allora per ipotesi induttiva |- B <-> Double(B)
+                             |- C <-> Double(C)
+                             
+quindi usando Double(B) -> B e C -> Double(C) ottengo:
+
+Double(B) -> B -> C -> Double(C) e quindi Double(B) -> Double(C)
+
+Per il viceversa procedo al contrario. Sfrutto B -> Double(B) e Double(C) -> C
+Quindi B -> Double(B) -> Double(C) -> C
+
+Se A = B <-> C
+
+allora Double(B) <-> B <-> C <-> Double(C)
+
+
+Lemma 0,00000000004 Data A, se Var(A) = ¬B, allora B = ¬¬C
+Dimostrazione.
+l'unica regola che ha ¬ come termine più esterno è quella per cui A = ¬Z
+In quel caso Var(¬Z) = ¬(¬¬X)
+
+
+
+
+Ora dimostriamo il teorema di completezza.
+Lo dimostriamo per A = Var(X)
+Tanto sappiamo che |- A <-> Var(X) e per l'adeguatezza |= A <-> Var(X) quindi A e Var(X) sono logicamente equivalenti
+         
+Dimostriamo che data I interpretazione tale che I(A) = V, allora val-I(p1), ..., val-I(pn) |- A con {p1, ..., pn} = Prop(A).
+
+Procediamo per induzione sulla lunghezza di A
+
+se A = p
+allora abbiamo
+I(A) = I(p) = V
+quindi val-I(p) = p
+quindi siccome abbiamo |- p -> p, abbiamo p |- p
+
+se A = B -> C
+siccome I(A) = V, allora abbiamo due casi
+- I(B) = V
+- I(B) = F
+
+Nel primo caso possiamo applicare l'ipotesi induttiva su B
+quindi val-I(Prop(B)) |- B
+Deve essere anche I(C) = V per essere I(A) = V
+quindi abbiamo
+val-I(Prop(C)) |- C
+
+quindi usando l'assioma C -> (B->C) otteniamo: val-I(Prop(B)), val-I(Prop(C)) |- B -> C
+
+Nel secondo caso ho I(¬B) = V
+allora siccome la lunghezza di ¬B è < della lunghezza di A per ipotesi induttiva ho
+val-I(Prop(B)) |- ¬B
+
+Voglio dimostrare val-I(Prop(B)), B |- C
+
+B -> (¬C -> B) (Ax->Mon)  
+¬B -> (¬C -> ¬B) (Ax->Mon)  
+B (hypotesys)
+¬B
+¬C -> B (MP)
+¬C -> ¬B (MP)
+(¬C -> B) -> (¬C -> ¬B ) -> ¬¬C (Ax¬Intro)
+¬¬C (2 MP)
+¬¬C -> C
+C (MP)
+
+Quindi abbiamo dimostrato val-I(Prop(B)) |- B -> C
+
+
+Se A = B ^ C
+I(A) = V <=> I(B) = I(C) = V
+per ipotesi induttiva val-I(Prop(B)) |- B e val-I(Prop(C)) |- C
+quindi sfruttando B->C->(B^C) ottengo val-I(Prop(B)), val-I(Prop(C)) |- B ^ C
+
+Se A = B v C
+I(A) = V <=> I(B) = V o I(C) = V
+nel primo caso ho val-I(Prop(B)) |- B e sfruttando B -> B v C ottengo val-I(Prop(B)), val-I(Prop(C)) |- B v C
+similmente nel secondo caso ho val-I(Prop(B)), val-I(Prop(C)) |- B v C
+
+Se A = ¬B
+I(A) = V <=> I(B) = F
+Per il lemma 0,00000000004 B = ¬¬C, I(B) = I(C) = F, quindi I(¬C) = V.
+Su ¬C vale l'ipotesi induttiva, perché ha lunghezza < di A  
+quindi
+val-I(¬(C)) |- ¬C  
+inoltre val-I(Prop(A)) = val-I(Prop(C)), perché Prop(A) = Prop(C)
+e inoltre |- ¬C -> ¬¬¬C dato che Double(¬C) = ¬¬¬C e |- Double(X) <-> X  
+Quindi val-I(Prop(A)) |- A.
+Quindi siccome |- Double(X) -> X si ha val-I(Prop(A)) |- X
+
+Quindi in definitiva abbiamo val-I(Prop(X)) |- X.
+Ora siccome X è una tautologia per ogni pn € Prop(X) possiamo trovare due I e I' tali che I(pn) = V e I'(pn) = F
+quindi abbiamo:  
+val-I(Prop(X) \ {pn}), ¬pn |- X e val-I(Prop(X) \ {pn}), pn |- X
+Per il lemma 0,00000000002 val-I(Prop(X) \{pn}) |- X.
+
+Quindi procedendo per induzione si giunge a |- X.  
+Quindi |= X => |- X. 

@@ -897,8 +897,10 @@ function reloadEditors() {
             // Update Preview Editor to use the new schema
             var errors = window.schemaEditor.validate();
             if(errors.length) {
-                alert('Invalid schema');
+                window.editorPreview.destroy();
+                window.editorPreview.renderZone.innerText = 'Invalid Schema.';
             } else {
+                window.editorPreview.renderZone.innerText = '';
                 // Feed the schema we defined in the schema editor into the preview editor
                 window.editorPreview.updateSchema(window.schemaEditor.getJSON());
             }

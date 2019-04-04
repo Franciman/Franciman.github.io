@@ -16,9 +16,14 @@ Editor.prototype.destroy = function() {
 
 // Recreate a new editor based on the given schema and start value
 // If schema is undefined, the editor is not recreated, but only destroyed
-Editor.prototype.updateSchema = function(schema) {
+Editor.prototype.updateSchema = function(schema, startval) {
     this.destroy();
-    this.jsonEditor = new JSONEditor(this.renderZone, { schema: schema });
+    if(startval) {
+        this.jsonEditor = new JSONEditor(this.renderZone, { schema: schema, startval: startval });
+    }
+    else {
+        this.jsonEditor = new JSONEditor(this.renderZone, { schema: schema });
+    }
 }
 
 // Validate JSON
@@ -29,6 +34,15 @@ Editor.prototype.validate = function() {
 // Get generated JSON
 Editor.prototype.getJSON = function() {
     return this.jsonEditor.getValue();
+}
+
+Editor.prototype.setJSON = function(val) {
+    this.jsonEditor.setValue(val);
+}
+
+// Check whether the JSON Editor is initialized
+Editor.prototype.isInitialized = function() {
+    return this.jsonEditor !== null;
 }
 
 // --------------- PreviewEditor subclass ------------------------------------
@@ -54,12 +68,90 @@ Object.defineProperty(PreviewEditor.prototype, 'constructor', {
     writable: true
 });
 
-PreviewEditor.prototype.updateSchema = function(schema) {
-    this.destroy();
-    this.jsonEditor = new JSONEditor(this.renderZone, {
-        schema: schema,
-        no_additional_properties: true
-    });
+PreviewEditor.prototype.updateSchema = function(schema, startval) {
+    if(startval) {
+        this.destroy();
+        this.jsonEditor = new JSONEditor(this.renderZone, {
+            schema: schema,
+            startval: startval,
+            no_additional_properties: true
+        });
+    }
+    else {
+        // If no startval is provided, try to reuse, where possible, the old values
+        var oldValue = undefined;
+        if(this.isInitialized()) {
+            oldValue = this.getJSON();
+        }
+
+        
+        this.destroy();
+        this.jsonEditor = new JSONEditor(this.renderZone, {
+            schema: schema,
+            no_additional_properties: true
+        });
+
+        // If there was a previous value, try keeping its values
+        if(typeof oldValue !== 'undefined') {
+
+            // Helper function to remove invalid entries from objects and arrays
+            function removeKey(obj, path) {
+                if(path.length === 0 || typeof obj === 'undefined') {
+                    return; // The prop was not found, do nothing
+                }
+                else {
+                    const prop = path.shift();
+                    if(path.length === 0) {
+                        // We found the deletion point
+                        // The object may be an array, in that case,
+                        // we remove the object from the array, instead of deleting it.
+                        // Deleting an element of the array just sets that element to undefined,
+                        // but doesn't remove it from the array
+                        if(Array.isArray(obj)) {
+                            // Be sure that the path element is a number
+                            if(!isNaN(prop)) {
+                                obj.splice(prop, 1);
+                            }
+                            else {
+                                // Otherwise don't delete anything, but report the strange behavior
+                                console.log("Invalid array index: ", prop);
+                            }
+                        }
+                        else {
+                            delete obj[prop];
+                        }
+                    }
+                    else {
+                        // Keep recursing
+                        removeKey(obj[prop], path);
+                    }
+                }
+            }
+
+            // We go through all problematic properties and remove them,
+            // only keeping properties whose value is still valid.
+            var errors = this.jsonEditor.validate(oldValue);
+            for(var error of errors) {
+                var components = error.path.split('.').slice(1); // Pop 'root' from path
+                if(error.property === 'additionalProperties') {
+                    // Ignore additional properties errors.
+                    // Superflous properties shall be deleted by JSONEditor itself.
+                    continue;
+                }
+                if(components.length === 0) {
+                    // The whole object must be invalidated
+                    oldValue = undefined;
+                    break;
+                }
+                else {
+                    removeKey(oldValue, components);
+                }
+            }
+            // Merge old and new values so that old valid values are kept
+            var newValue = Object.assign(this.getJSON(), oldValue);
+            this.setJSON(newValue);
+        }
+    }
 }
 
 
@@ -129,14 +221,14 @@ Object.defineProperty(SchemaEditor.prototype, 'constructor', {
 });
 
 // Override the updateSchema function
-SchemaEditor.prototype.updateSchema = function(schema) {
+SchemaEditor.prototype.updateSchema = function(schema, startval) {
     this.destroy();
 
     // Add extra validation logic for integer schemas that use the `range` format.
     // For integer schemas that use the `range` format we require that minimum and maximum properties are set, too.
     var range_integer_validator = function(schema, value, path) {
         var errors = [];
-        if(value.type === 'integer' && value.format === 'range') {
+        if(value !== null && value.type === 'integer' && value.format === 'range') {
             if(typeof value.minimum === 'undefined' || typeof value.maximum === 'undefined') {
                 errors.push({
                     path: path,
@@ -151,7 +243,7 @@ SchemaEditor.prototype.updateSchema = function(schema) {
     // Check that if minimum and maximum are specified, minimum <= maximum
     var min_max_consistence_validator = function(schema, value, path) {
         var errors = [];
-        if(value.type === 'integer' || value.type === 'number') {
+        if(value !== null && (value.type === 'integer' || value.type === 'number')) {
             if(typeof value.minimum !== 'undefined' && typeof value.minimum !== 'undefined' && value.minimum > value.maximum) {
                 errors.push({
                     path: path,
@@ -163,11 +255,21 @@ SchemaEditor.prototype.updateSchema = function(schema) {
         return errors;
     };
 
-    // Recreate the JSON-Editor
-    this.jsonEditor = new JSONEditor(this.renderZone, {
-        schema: schema,
-        custom_validators: [ range_integer_validator, min_max_consistence_validator ]
-    });
+    if(startval) {
+        // Recreate the JSON-Editor
+        this.jsonEditor = new JSONEditor(this.renderZone, {
+            schema: schema,
+            startval: startval,
+            custom_validators: [ range_integer_validator, min_max_consistence_validator ]
+        });
+    }
+    else {
+        // Recreate the JSON-Editor
+        this.jsonEditor = new JSONEditor(this.renderZone, {
+            schema: schema,
+            custom_validators: [ range_integer_validator, min_max_consistence_validator ]
+        });
+    }
 
 
     // Add a save button
